@@ -40,3 +40,7 @@ Vui lòng đọc kỹ file [USER_GUIDE.md](docs/USER_GUIDE.md) để hiểu rõ:
 Dự án này được thiết kế ĐỘC QUYỀN cho mục đích hỗ trợ phụ huynh quản lý máy tính cá nhân của con cái trong gia đình. Vui lòng không sử dụng mã nguồn này vào bất kỳ mục đích nào xâm phạm quyền riêng tư hợp pháp của người khác.
 
 
+
+
+## 📝 Changelog
+* **v3.0.1 (Sep 2026)**: Vá lỗi vòng lặp Watchdog (Anti-Kill Loop), tối ưu logic hạ quyền Admin (chỉ nhắm vào tài khoản con), sửa lỗi kẹt Policy Chrome/Edge khi thoát Restricted Mode.
