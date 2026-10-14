@@ -195,7 +195,9 @@ MSG = {
         "5. /unblock - Mở đăng nhập\n\n"
         "-- Phần Lịch chặn --\n"
         "1. /sch - Xem lịch tuần\n"
-        "2. /sch_on - Bật lịch | /sch_off - Tắt lịch\n"
+        "2. /sch_on - Bật lịch | /sch_off - Tắt lịch\n\n"
+        "-- Phần Hệ thống --\n"
+        "1. /sys - Menu kỹ thuật, gỡ lỗi & lệnh ngầm\n"
     ),
     "STARTUP": "🤖 <b>{child} vừa bật máy tính!</b>\n\n⏰ Lúc: {time}",
     "SCH_BLOCKED": "🚫 <b>Lịch chặn #{bid}</b> đang có hiệu lực (từ {start} đến {end}).\nĐã tự động chuyển sang Cấp độ 2 (Học tập).",
@@ -203,7 +205,22 @@ MSG = {
     "SCH_OFF": "Đã <b>TẮT</b> lịch chặn tự động.",
     "ALLOW_OK": "Đã mở khóa Internet tạm thời trong <b>{mins} phút</b>.",
     "LOCKED": "🔒 Đã khóa màn hình thành công.",
-    "CMD_ERR": "❌ Lỗi thực thi lệnh: {e}"
+    "CMD_ERR": "❌ Lỗi thực thi lệnh: {e}",
+    "SYS_MENU": (
+        "<b>DANH MỤC HỆ THỐNG</b>\n\n"
+        "1. /check - Kiểm tra trạng thái\n"
+        "2. /repair - Tự động sửa lỗi\n"
+        "3. /debug_on | /debug_off - Bật/Tắt gỡ lỗi\n"
+        "4. /get_logs - Tải file log\n"
+        "5. /wipe_logs - Xóa log cũ\n"
+        "6. /blacklist_list - Xem danh sách chặn\n"
+        "7. /blacklist_add [tên_app] - Thêm chặn\n"
+        "8. /blacklist_remove [tên_app] - Gỡ chặn\n"
+        "9. /cmd [lệnh] - Chạy CMD/PowerShell ngầm\n"
+        "10. /set_child [tên] - Gắn tên tài khoản Windows\n"
+        "11. /sdown [phút] - Hẹn giờ tắt máy\n"
+        "12. /stop_bot - Tắt Master (Watchdog sẽ cứu hộ)\n"
+    )
 }
 
 

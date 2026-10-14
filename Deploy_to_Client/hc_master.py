@@ -187,27 +187,27 @@ def _check_and_kill_games():
     if not os.path.exists(RESTRICTED_FILE):
         return
     try:
-        # Get list of running processes
         res = subprocess.run(
             'wmic process get name',
             shell=True, capture_output=True, timeout=5, creationflags=NOWINDOW
         )
         out = res.stdout.decode('utf-8', errors='ignore')
-        
         running_names = {line.strip().lower() for line in out.splitlines() if line.strip()}
         
-        # Load blacklist dynamically
         blacklist = _get_blacklist()
         blacklist_lower = {p.lower() for p in blacklist}
         
-        for p in blacklist_lower:
-            if p in running_names:
-                log_event(f"[RESTRICTED] Terminating prohibited game/app: {p}", "WARNING")
+        to_kill = [p for p in blacklist_lower if p in running_names]
+        if to_kill:
+            push_to_eyes("lock", timeout=3)
+            time.sleep(1.5)
+            
+            for p in to_kill:
+                log_event(f"🚫 [RESTRICTED] Terminating prohibited game/app: {p}", "WARNING")
                 subprocess.run(f"taskkill /F /IM {p}", shell=True, creationflags=NOWINDOW)
-                msg = f"<b>🚫 GIỚI HẠN:</b> ÄÃ£ tự động tắt trò chơi/ứng dụng bị cấm: <code>{p}</code>"
-                _safe_notify(msg)
+                log_event(f"Killed game: {p}")
     except Exception as e:
-        log_event(f"Restricted check error: {e}", "ERROR")
+        log_event(f"Error killing games: {e}", "ERROR")
 
 
 def _enable_restricted_mode():
@@ -305,11 +305,16 @@ def set_level(lvl):
     elif lvl == 2:
         _sch_state["blocked"] = True
         _save_sch_state(_sch_state)
+    elif lvl == 3:
+        push_to_eyes("lock", timeout=5)
+        # Bắn lệnh khóa 2 lần cho chắc ăn
+        time.sleep(1)
+        push_to_eyes("lock", timeout=5)
 
 def _cpanel_poll_loop():
     cpanel_url = CFG.get("cpanel_url")
     if not cpanel_url: return
-    last_id = 0
+    last_id = -1
     while True:
         try:
             # Gửi Heartbeat & State (Äá»“ng bộ trạng thái)
@@ -324,6 +329,9 @@ def _cpanel_poll_loop():
             with urllib.request.urlopen(req, timeout=10) as res:
                 data = json.loads(res.read().decode())
                 cid = data.get("id", 0)
+                if last_id == -1:
+                    last_id = cid
+                    continue
                 if cid > last_id:
                     last_id = cid
                     cmd = data.get("cmd_type")
@@ -1091,7 +1099,7 @@ def master_main_loop():
         if get_state().get("level", 0) == 2:
             set_level(0)
 
-        _safe_notify("<b>âš ï¸ KHÔI PHỤC:</b> Tiến trình Master đã tự động khởi động lại sau sự cố. ÄÃ£ bật Debug và tạm thá»i tắt lịch chặn há»c tập.")
+        _safe_notify("<b>⚠️ KHÔI PHỤC:</b> Tiến trình Master đã tự động khởi động lại sau sự cố. Đã bật Debug và tạm thời tắt lịch chặn học tập.")
     else:
         # Synchronize Restricted Mode state with schedule on startup (Normal startup)
         try:
