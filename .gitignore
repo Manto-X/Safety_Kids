@@ -1,0 +1,40 @@
+﻿# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+
+# All real configurations (ignored entirely)
+Deploy_to_Client/config/
+
+# Runtime Data (Logs, States, Temps)
+Deploy_to_Client/data/
+Controller_Suite/web_cPanel/data/
+
+# Backups and Local working dirs
+another_from_Dell/
+web_cPanel/
+scratch/
+
+# Private Docs
+*PRIVATE_*
+
+# === Security Patch ===
+*.key
+*.pem
+*.p12
+*.pfx
+*.pkcs12
+*.ppk
+*.pub
+id_*
+credentials.json
+client_secret*.json
+.agents/
+*.env
+*.env.*
+
+# OS desktop.ini
+desktop.ini
+Desktop.ini
+[Dd]esktop.ini

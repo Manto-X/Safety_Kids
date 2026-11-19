@@ -1,0 +1,18 @@
+﻿{
+  "telegram_token": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+  "allowed_id": 123456789,
+  "api_key": "YOUR_SECRET_API_KEY_HERE",
+  "api_port": 1234,
+  "ipc_port": 5678,
+  "app_blacklist": [
+    "robloxplayerbeta.exe",
+    "osu!.exe",
+    "mcengine_dx11.exe",
+    "mcengine.exe",
+    "javaw.exe",
+    "steam.exe",
+    "discord.exe"
+  ],
+  "cpanel_url": "http://192.168.1.xxx/Safety_Kids/Controller_Suite/web_cPanel",
+  "debug_mode": true
+}
